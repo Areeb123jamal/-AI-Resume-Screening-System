@@ -1,5 +1,7 @@
 # AI Resume Screening System — Prototype
 
+[![Python tests](https://github.com/Areeb123jamal/-AI-Resume-Screening-System/actions/workflows/tests.yml/badge.svg)](https://github.com/Areeb123jamal/-AI-Resume-Screening-System/actions/workflows/tests.yml)
+
 > **Status: prototype; not a validated hiring tool.** This repository contains an imported Flask API and a lightweight heuristic matching engine. Resume parsing is rule-based, scoring is unvalidated, and all candidate records are held in memory.
 
 ## What is included
