@@ -1,3 +1,23 @@
+# Resume Processing Flow — Design Notes
+
+> **Status clarification:** This file preserves an inherited design document, not a description of the currently implemented application. The current Flask app accepts JSON text and candidate skills, uses basic regex-based text extraction and TF-IDF/skill-overlap scoring, and stores matches in process memory. PDF/DOCX upload parsing, spaCy NER, a production database, email notifications, and the performance targets below are **not implemented or verified** in the current source. Treat the following architecture as a proposed design only.
+
+## Current implementation at a glance
+
+1. `POST /match` accepts a candidate name, skill list, experience value, and optional resume text.
+2. The prototype compares candidate text against three hard-coded example job descriptions.
+3. A heuristic score combines TF-IDF text similarity, required-skill overlap, and a simple experience component.
+4. The result is returned by the Flask API. Candidate results remain in memory and reset when the process restarts.
+5. `POST /parse_resume` uses simple pattern matching; extracted details require human verification.
+
+This is a learning prototype. Do not use scores as hiring decisions or automatically reject candidates. The scoring weights and thresholds have not been calibrated or evaluated for accuracy or fairness.
+
+---
+
+## Original proposed architecture (not implemented)
+
+The following sections preserve the original technical plan for reference. They should not be read as evidence that these features exist in the current code.
+
 # Resume Processing Flow Definition
 ## AI Resume Screening System — Technical Documentation
 
