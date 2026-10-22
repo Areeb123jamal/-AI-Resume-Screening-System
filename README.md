@@ -70,8 +70,10 @@ curl -X POST http://127.0.0.1:5000/parse_resume \
 - `data_generator.py` — synthetic candidate generator
 - `job_descriptions.json` — human-readable sample job data
 - `requirements.txt` — Python dependencies
-- `flow_definition.md` — documented intended processing flow
+- `docs/flow_definition.md` — documented intended processing flow
 - `SCREENSHOTS.md` — notes on optional API screenshots
+- `tests/test_app.py` — API smoke tests
+- `.github/workflows/tests.yml` — GitHub Actions test workflow
 
 ## Next validation steps
 1. Add automated tests for empty inputs, unknown skills, missing experience, and invalid request types.
