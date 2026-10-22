@@ -30,6 +30,14 @@ class ResumeScreeningApiTests(unittest.TestCase):
         response = self.client.post("/match", json={"name": "Sample Candidate"})
         self.assertEqual(response.status_code, 400)
 
+    def test_match_rejects_invalid_experience(self):
+        response = self.client.post("/match", json={
+            "name": "Sample Candidate",
+            "skills": ["SQL"],
+            "experience": "not-a-number"
+        })
+        self.assertEqual(response.status_code, 400)
+
     def test_parse_resume_text_returns_extracted_fields(self):
         response = self.client.post("/parse_resume", json={
             "resume_text": "Sample Candidate\nsample@example.com\nSkills: SQL, Python, Excel\n2 years of experience\nBCA"
