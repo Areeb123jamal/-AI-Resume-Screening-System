@@ -1,29 +1,40 @@
-# ============================================================
-#  AI Resume Screening System — requirements.txt
-#  Install with: pip install -r requirements.txt
-# ============================================================
-
-# ── Web Framework ────────────────────────────────────────────
-Flask==3.0.0
-Werkzeug==3.0.1
-
-# ── NLP ──────────────────────────────────────────────────────
-spacy==3.7.2
-# After install, run: python -m spacy download en_core_web_lg
-
-# ── Machine Learning ─────────────────────────────────────────
-scikit-learn==1.4.0
-numpy==1.26.3
-pandas==2.1.4
-
-# ── Document Parsing ─────────────────────────────────────────
-PyMuPDF==1.23.8        # PDF text extraction
-python-docx==1.1.0     # DOCX text extraction
-
-# ── Utilities ────────────────────────────────────────────────
-python-dotenv==1.0.0   # Environment variable management
-gunicorn==21.2.0       # Production WSGI server
-
-# ── Development / Testing ────────────────────────────────────
-pytest==7.4.4
-pytest-cov==4.1.0
+{
+  "job_descriptions": [
+    {
+      "title": "Data Analyst",
+      "description": "Analyze data, build reports and dashboards, validate data quality, use SQL, Excel, Python and business intelligence tools.",
+      "required_skills": [
+        "SQL",
+        "Excel",
+        "Power BI",
+        "Python",
+        "Data Analysis"
+      ],
+      "min_experience": 0
+    },
+    {
+      "title": "Python Developer",
+      "description": "Build Python applications and APIs, write maintainable code, work with databases, testing and software development.",
+      "required_skills": [
+        "Python",
+        "Flask",
+        "SQL",
+        "Git",
+        "REST API"
+      ],
+      "min_experience": 1
+    },
+    {
+      "title": "Machine Learning Analyst",
+      "description": "Explore datasets, build machine learning workflows, evaluate models and communicate analytical results.",
+      "required_skills": [
+        "Python",
+        "Machine Learning",
+        "pandas",
+        "scikit-learn",
+        "Statistics"
+      ],
+      "min_experience": 1
+    }
+  ]
+}
