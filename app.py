@@ -9,6 +9,7 @@ from flask import Flask, request, jsonify
 from matcher import ResumeMatcher
 import json
 import os
+import math
 
 # ─── App Initialisation ─────────────────────────────────────
 app = Flask(__name__)
@@ -69,15 +70,32 @@ def match_resume():
         if field not in data:
             return jsonify({"error": f"Missing required field: '{field}'"}), 400
 
-    if not isinstance(data["skills"], list) or len(data["skills"]) == 0:
-        return jsonify({"error": "'skills' must be a non-empty list."}), 400
+    if not isinstance(data["name"], str) or not data["name"].strip():
+        return jsonify({"error": "'name' must be a non-empty string."}), 400
+
+    if not isinstance(data["skills"], list) or not data["skills"] or any(
+        not isinstance(skill, str) or not skill.strip() for skill in data["skills"]
+    ):
+        return jsonify({"error": "'skills' must be a non-empty list of non-empty strings."}), 400
+
+    try:
+        experience_years = float(data["experience"])
+    except (TypeError, ValueError):
+        return jsonify({"error": "'experience' must be a non-negative number."}), 400
+
+    if not math.isfinite(experience_years) or experience_years < 0:
+        return jsonify({"error": "'experience' must be a finite, non-negative number."}), 400
+
+    resume_text = data.get("resume_text", "")
+    if not isinstance(resume_text, str):
+        return jsonify({"error": "'resume_text' must be a string when provided."}), 400
 
     # ── Run matching engine ──────────────────────────────────
     result = matcher.compute_match_score(
-        candidate_name  = data["name"],
-        candidate_skills= data["skills"],
-        experience_years= float(data.get("experience", 0)),
-        resume_text     = data.get("resume_text", "")
+        candidate_name=data["name"].strip(),
+        candidate_skills=data["skills"],
+        experience_years=experience_years,
+        resume_text=resume_text
     )
 
     return jsonify(result), 200
